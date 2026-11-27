@@ -1,0 +1,13 @@
+package: mindvoice
+generate:
+  models: true
+  client: true
+output: client.gen.go
+output-options:
+  name-normalizer: ToCamelCaseWithInitialisms
+  client-type-name: RawClient
+  overlay:
+    path: openapi/mindvoice.overlay.yaml
+    strict: true
+  user-templates:
+    client-with-responses.tmpl: openapi/client-with-responses.tmpl

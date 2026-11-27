@@ -1,0 +1,26 @@
+{{- /* Шаблон возвращает типизированный результат успешного JSON-ответа. */ -}}
+{{range . -}}
+    {{- $operation := . -}}
+    {{- $name := .OperationId -}}
+    {{- /* Потоковые операции реализованы в files.go. */ -}}
+    {{- if and (ne $name "UploadRecording") (ne $name "DownloadRecording") (ne $name "ExportTranscript") -}}
+        {{- range .Responses -}}
+            {{- $status := .StatusCode -}}
+            {{- if lt $status "300" -}}
+                {{- range .Contents -}}
+                    {{- if eq .ContentType "application/json" -}}
+                        {{- $result := .Schema.TypeDecl -}}
+                        {{- range $operation.ClientMethodVariants -}}
+                            {{- if ne .Suffix "WithBody"}}
+// {{$name}} {{$operation.Summary}}
+func (c *Client) {{$name}}(ctx context.Context{{.ArgsDecl}}) (*{{$result}}, error) {
+    return jsonResponse[{{$result}}](c.raw.{{$name}}{{.Suffix}}(ctx{{.CallArgs}}))
+}
+                            {{- end -}}
+                        {{- end -}}
+                    {{- end -}}
+                {{- end -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+{{- end}}

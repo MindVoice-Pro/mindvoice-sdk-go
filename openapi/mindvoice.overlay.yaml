@@ -1,0 +1,205 @@
+overlay: 1.0.0
+info:
+  title: Имена и типы Go SDK MindVoice
+  version: 1.0.0
+actions:
+  # Имена методов и комментарии Go берутся из этого файла, HTTP-контракт остаётся исходным.
+  - target: "$.paths['/v1/workspaces'].get"
+    update:
+      operationId: ListWorkspaces
+      summary: Возвращает пространства, доступные ключу Workspace.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/overview'].get"
+    update:
+      operationId: GetWorkspaceOverview
+      summary: Возвращает общие сведения о пространстве.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/recordings'].post"
+    update:
+      operationId: UploadRecording
+      summary: Загружает аудиофайл в пространство.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/recordings'].get"
+    update:
+      operationId: ListRecordings
+      summary: Возвращает страницу аудиозаписей.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/recordings/import'].post"
+    update:
+      operationId: ImportRecording
+      summary: Ставит импорт аудиозаписи по внешней ссылке в очередь.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/recordings/{recording_id}/import/retry'].post"
+    update:
+      operationId: RetryRecordingImport
+      summary: Ставит повторную попытку импорта аудиозаписи в очередь.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/recordings/{recording_id}'].get"
+    update:
+      operationId: GetRecording
+      summary: Возвращает аудиозапись по идентификатору.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/recordings/{recording_id}'].patch"
+    update:
+      operationId: UpdateRecording
+      summary: Изменяет пользовательские поля аудиозаписи по маске.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/recordings/{recording_id}'].delete"
+    update:
+      operationId: DeleteRecording
+      summary: Удаляет аудиозапись.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/recordings/{recording_id}/annul'].post"
+    update:
+      operationId: AnnulRecording
+      summary: Аннулирует аудиозапись.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/recordings/{recording_id}/download'].get"
+    update:
+      operationId: DownloadRecording
+      summary: Возвращает поток исходного аудио.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/recordings/{recording_id}/audio-analysis/retry'].post"
+    update:
+      operationId: RetryRecordingAudioAnalysis
+      summary: Ставит повторный технический анализ аудиофайла в очередь.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/transcription-scenarios'].get"
+    update:
+      operationId: ListTranscriptionScenarios
+      summary: Возвращает страницу сценариев транскрибации.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/transcription-scenarios/{scenario_id}'].get"
+    update:
+      operationId: GetTranscriptionScenario
+      summary: Возвращает сценарий транскрибации.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/transcription-scenarios/{scenario_id}/activation'].post"
+    update:
+      operationId: SetTranscriptionScenarioActive
+      summary: Устанавливает состояние активности сценария транскрибации.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/transcription-scenarios/{scenario_id}/executions'].post"
+    update:
+      operationId: StartTranscriptionScenarioExecution
+      summary: Запускает обработку записей по сценарию транскрибации.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/transcription-scenarios/{scenario_id}/executions'].get"
+    update:
+      operationId: ListTranscriptionScenarioExecutions
+      summary: Возвращает страницу запусков сценария транскрибации.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/recordings/{recording_id}/transcription-runs'].post"
+    update:
+      operationId: StartTranscriptionRun
+      summary: Запускает транскрибацию аудиозаписи.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/transcription-runs'].get"
+    update:
+      operationId: ListTranscriptionRuns
+      summary: Возвращает страницу запусков транскрибации.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/transcription-runs/{run_id}'].get"
+    update:
+      operationId: GetTranscriptionRun
+      summary: Возвращает запуск транскрибации по идентификатору.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/recordings/{recording_id}/transcript'].get"
+    update:
+      operationId: GetRecordingTranscript
+      summary: Возвращает текст расшифровки аудиозаписи.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/transcription-runs/{run_id}/transcript'].get"
+    update:
+      operationId: GetTranscript
+      summary: Возвращает текст расшифровки указанного запуска.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/transcription-runs/{run_id}/transcript/export'].get"
+    update:
+      operationId: ExportTranscript
+      summary: Возвращает поток файла с текстом расшифровки.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/transcription-runs/{run_id}/retry'].post"
+    update:
+      operationId: RetryTranscriptionRun
+      summary: Создаёт повторную попытку транскрибации.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/transcription-runs/{run_id}/cancel'].post"
+    update:
+      operationId: CancelTranscriptionRun
+      summary: Отменяет запуск транскрибации.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/transcription-runs/{run_id}/annul'].post"
+    update:
+      operationId: AnnulTranscriptionRun
+      summary: Аннулирует запуск транскрибации.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/analysis-criteria'].get"
+    update:
+      operationId: SearchAnalysisCriteria
+      summary: Ищет критерии анализа в пространстве.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/analysis-scenarios'].get"
+    update:
+      operationId: ListAnalysisScenarios
+      summary: Возвращает страницу сценариев анализа.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/analysis-scenarios/{scenario_id}'].get"
+    update:
+      operationId: GetAnalysisScenario
+      summary: Возвращает сценарий анализа.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/analysis-scenarios/{scenario_id}/activation'].post"
+    update:
+      operationId: SetAnalysisScenarioActive
+      summary: Устанавливает состояние активности сценария анализа.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/analysis-scenarios/{scenario_id}/executions'].post"
+    update:
+      operationId: StartAnalysisScenarioExecution
+      summary: Запускает обработку записей по сценарию анализа.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/analysis-scenarios/{scenario_id}/executions'].get"
+    update:
+      operationId: ListAnalysisScenarioExecutions
+      summary: Возвращает страницу запусков сценария анализа.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/recordings/{recording_id}/analysis-runs'].post"
+    update:
+      operationId: StartAnalysisRun
+      summary: Запускает анализ аудиозаписи.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/analysis-runs'].get"
+    update:
+      operationId: ListAnalysisRuns
+      summary: Возвращает страницу запусков анализа.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/analysis-runs/{run_id}'].get"
+    update:
+      operationId: GetAnalysisRun
+      summary: Возвращает подробности запуска анализа.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/analysis-results/{result_id}'].get"
+    update:
+      operationId: GetAnalysisResult
+      summary: Возвращает результат анализа по идентификатору результата.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/analysis-runs/{run_id}/retry'].post"
+    update:
+      operationId: RetryAnalysisRun
+      summary: Создаёт повторную попытку анализа.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/analysis-runs/{run_id}/annul'].post"
+    update:
+      operationId: AnnulAnalysisRun
+      summary: Аннулирует запуск анализа.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/analysis-runs/{run_id}/cancel'].post"
+    update:
+      operationId: CancelAnalysisRun
+      summary: Отменяет запуск анализа.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/recordings/{recording_id}/analysis-results/{analysis_run_id}'].get"
+    update:
+      operationId: GetRecordingAnalysisResult
+      summary: Возвращает результат указанного запуска для аудиозаписи.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/analysis-results'].get"
+    update:
+      operationId: ListAnalysisResults
+      summary: Возвращает страницу результатов анализа.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/analysis-criterion-templates'].get"
+    update:
+      operationId: ListAnalysisCriterionTemplates
+      summary: Возвращает каталог шаблонов критериев анализа.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/analysis-criterion-templates/{template_id}/versions/{version}'].get"
+    update:
+      operationId: GetAnalysisCriterionTemplateVersion
+      summary: Возвращает указанную редакцию шаблона критерия анализа.
+  # Имена форматов файла входят в открытый интерфейс SDK.
+  - target: "$.paths['/v1/workspaces/{workspace_id}/transcription-runs/{run_id}/transcript/export'].get.parameters[?(@.name == 'format')].schema"
+    update:
+      x-go-type-name: TranscriptFormat
+      x-enum-varnames:
+        - FormatSRT
+        - FormatVTT
+        - FormatTXT
+        - FormatTXTTimestamps
+  # Произвольный JSON сохраняет исходные числа и явный null.
+  - target: "$.components.schemas.JsonValue"
+    update:
+      x-go-type: json.RawMessage
+      x-go-type-import:
+        path: encoding/json
+  - target: "$.components.schemas['JsonObject','JsonObject-Input','JsonObject-Output']"
+    update:
+      x-go-type: 'map[string]json.RawMessage'
+      x-go-type-import:
+        path: encoding/json
+  # Обе формы календарной границы передаются как строки.
+  - target: "$.components.schemas.DateBoundary"
+    update:
+      x-go-type: string
+  # Указатели на поля ответа различают отсутствие, false и пустую строку.
+  - target: "$.components.schemas.AnswerValue.oneOf"
+    remove: true
